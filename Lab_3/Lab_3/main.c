@@ -13,6 +13,7 @@
  const char MS4[] = "\r\nReady: ";
  const char MS5[] = "\r\nInvalid Command Try Again...";
  const char MS6[] = "Volts\r";
+ const char MS7[] = "F\r";
  
  
 
