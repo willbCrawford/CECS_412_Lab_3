@@ -4,6 +4,7 @@
  // Author : Eugene Rockey
  // Copyright 2018, All Rights Reserved
 
+		;Begin here Will C.
 
 .section ".data"					//equivalent to DSEG
 .equ	DDRB,0x04					//student comment here
@@ -44,7 +45,9 @@
 
 .set	temp,0				//student comment here
 
-.section ".text"			//equivalent to CSEG
+		;Begin here Nathan B.
+
+.section ".text"			//equivalent to CSEG 
 .global Mega328P_Init
 Mega328P_Init:
 		ldi	r16,0x07		;PB0(R*W),PB1(RS),PB2(E) as fixed outputs
@@ -88,6 +91,8 @@ LCD_Write_Command:
 	call	UART_On			//student comment here
 	ret						//student comment here
 
+	;Begin here, Laith
+
 LCD_Delay:
 	ldi		r16,0xFA		//student comment here
 D0:	ldi		r17,0xFF		//student comment here
@@ -124,6 +129,8 @@ LCD_Read_Data:
 	out		PORTB,0			//student comment here
 	call	UART_On			//student comment here
 	ret						//student comment here
+
+	;Begin here Nathan H.
 
 .global UART_On
 UART_On:
@@ -165,6 +172,8 @@ UART_Put:
 	sts		UDR0,r16			//student comment here
 	ret							//student comment here
 
+	;Begin here, Dhan
+
 .global ADC_Get
 ADC_Get:
 		ldi		r16,0xC7			//student comment here
@@ -205,7 +214,7 @@ EEPROM_Read:
 		in      r16,EEDR		; Read data from Data Register
 		sts		ASCII,r16  
 		ret
-
+		//End Dhan
 
 		.end
 

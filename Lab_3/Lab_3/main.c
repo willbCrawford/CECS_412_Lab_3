@@ -56,6 +56,12 @@ void LCD_Puts(const char *str)	//Display a string on the LCD Module
 	}
 }
 
+void LCD_PutChar(const char str){
+	DATA = str;
+	
+	LCD_Write_Data();
+}
+
 
 void Banner(void)				//Display Tiny OS Banner on Terminal
 {
@@ -81,13 +87,48 @@ void LCD(void)						//Lite LCD demo
 	LCD_Write_Command();
 	DATA = 0x0f;					//Student Comment Here
 	LCD_Write_Command();
-	LCD_Puts("Hello ECE412!");
-	/*
-	Re-engineer this subroutine to have the LCD endlessly scroll a marquee sign of 
-	your Team's name either vertically or horizontally. Any key press should stop
-	the scrolling and return execution to the command line in Terminal. User must
-	always be able to return to command line.
-	*/
+	
+	do 
+	{
+		ScrollFromLeft("We are Barely Passing!");
+		/*
+		Re-engineer this subroutine to have the LCD endlessly scroll a marquee sign of 
+		your Team's name either vertically or horizontally. Any key press should stop
+		the scrolling and return execution to the command line in Terminal. User must
+		always be able to return to command line.
+		*/
+		
+		UART_Get();
+		
+	} while (ASCII == '\0');
+}
+
+void ScrollFromLeft(const char* str){
+	
+	char char_to_put_on_LCD;
+	
+	while (*str){
+		
+		char_to_put_on_LCD = *str++;
+		
+		LCD_PutChar(char_to_put_on_LCD);
+		
+	}
+	
+	ScrollFromRight(str);
+}
+
+void ScrollFromRight(char* str){
+	
+	char char_to_put_on_LCD;
+	
+	while (*str){
+		
+		char_to_put_on_LCD = *str--;
+		
+		LCD_PutChar(char_to_put_on_LCD);
+		
+	}
 }
 
 void ADC(void)						//Lite Demo of the Analog to Digital Converter
